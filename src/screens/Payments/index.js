@@ -1,7 +1,7 @@
 /* eslint-disable no-alert */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import LottieView from 'lottie-react-native';
 import Base64 from 'Base64';
 
@@ -55,6 +55,12 @@ export default function Payments() {
       return;
     }
 
+    await new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+        resolve();
+      },1200);
+    });
+    Alert.alert('Status da Transferência',"Você acaba de transferir 25 reais para Pedro Mello");
     await recording.stopAndUnloadAsync();
 
     const { uri: audioUri } = await FileSystem.getInfoAsync(recording.getURI());

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { MaterialIcons } from '@expo/vector-icons';
-// import avatar from '../../assets/avatars/pp.jpg';
 
 
 import {
