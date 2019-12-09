@@ -14,6 +14,8 @@ import { MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
 import * as animationData from '../../assets/animations/588-wallet-coin.json';
 
 import { Container, Title, Head, Info, AudioButton } from './styles';
+import Background from '../../components/Background/index.js';
+import Header from '../../components/Header/index.js';
 
 export default function Payments() {
   const [audioPermission, setAudioPermission] = useState(false);
@@ -55,12 +57,15 @@ export default function Payments() {
       return;
     }
 
-    await new Promise((resolve,reject)=>{
-      setTimeout(()=>{
+    await new Promise((resolve, reject) => {
+      setTimeout(() => {
         resolve();
-      },1200);
+      }, 1200);
     });
-    Alert.alert('Status da Transferência',"Você acaba de transferir 25 reais para Pedro Mello");
+    Alert.alert(
+      'Status da Transferência',
+      'Você acaba de transferir 25 reais para Pedro Mello'
+    );
     await recording.stopAndUnloadAsync();
 
     const { uri: audioUri } = await FileSystem.getInfoAsync(recording.getURI());
@@ -69,22 +74,30 @@ export default function Payments() {
   }
 
   return (
-    <Container>
-      <Head>
-        <Title>Fale com Satoshi</Title>
-      </Head>
-      <Info>
-        <LottieView source={animationData} autoPlay loop style={{ flex: 1 }} />
-      </Info>
-      <View>
-        <AudioButton
-          onPress={handleAudioRecording}
-          isRecording={recordingAudio}
-        >
-          <MaterialCommunityIcons name="microphone" size={50} color="#fff" />
-        </AudioButton>
-      </View>
-    </Container>
+    <Background>
+      <Header />
+      <Container>
+        <Head>
+          <Title>Fale com Satoshi</Title>
+        </Head>
+        <Info>
+          <LottieView
+            source={animationData}
+            autoPlay
+            loop
+            style={{ flex: 1 }}
+          />
+        </Info>
+        <View>
+          <AudioButton
+            onPress={handleAudioRecording}
+            isRecording={recordingAudio}
+          >
+            <MaterialCommunityIcons name="microphone" size={50} color="#fff" />
+          </AudioButton>
+        </View>
+      </Container>
+    </Background>
   );
 }
 
